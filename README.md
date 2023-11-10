@@ -23,6 +23,7 @@ cds repl
 --> Output is different and not correct.
 <p><img width="687" alt="image" src="https://github.com/artless-soul/sap-cap-projection-test-01/assets/92021873/51de999e-f053-4e7e-8a09-f68322500dae"></p>
 
+### Expected result
 ==> Expectation is that the cql to return the same data as the view in the db.
 
 # Note: 
