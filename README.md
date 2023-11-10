@@ -1,25 +1,29 @@
-# Getting Started
+# Steps
 
-Welcome to your new project.
+yarn
 
-It contains these folders and files, following our recommended project layout:
+cds deploy --to hana
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`package.json` | project metadata and configuration
-`readme.md` | this getting started guide
+## Compare the output in cds repl
 
+cds repl
+> var test = cds.test('.')
 
-## Next Steps
+### Result directly from the db
+> await cds.run('SELECT * from sap_avp_EventLogUserTeamArrays');
 
-- Open a new terminal and run `cds watch` 
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start adding content, for example, a [db/schema.cds](db/schema.cds).
+--> Ouput (as directly from db).. this can be seen using db explorer also..
+<p><img width="467" alt="image" src="https://github.com/artless-soul/sap-cap-projection-test-01/assets/92021873/03c3ad8d-bed1-42fa-83b4-b6bde35ad2a7"></p>
 
+### Result from the cap cql
+> const { ['sap.avp.EventLogUserTeamArrays']: EventLogUserTeamArrays} = cds.model?.definitions;
+> await SELECT.from(EventLogUserTeamArrays);
 
-## Learn More
+--> Output is differnt and not correct.
+<p><img width="687" alt="image" src="https://github.com/artless-soul/sap-cap-projection-test-01/assets/92021873/51de999e-f053-4e7e-8a09-f68322500dae"></p>
 
-Learn more at https://cap.cloud.sap/docs/get-started/.
+==> Expectation is that the cql to return the same data as the view in the db.
+
+# Note: 
+The same sceario is tested on sqlite (need to use the commented definition from db/schema.db for EventLogUserTeamArrays).
+There result is same from sql and cql.
