@@ -40,12 +40,26 @@ entity EventLogs: managed{
 entity EventLogUserTeamArrays as projection on EventLogs {
   key modifiedBy as user_ID,
       coalesce(
-        last_value(userSetting.environmentNotification) over (order by modifiedAt), true
+        last_value(userSetting.environmentNotification order by modifiedAt), true
       ) as environmentNotification: EnvironmentNotification,
       coalesce(
-        last_value(userSetting.processNotification) over (order by modifiedAt), true
+        last_value(userSetting.processNotification order by modifiedAt), true
       ) as processNotification: ProcessNotification,
       coalesce(
-        last_value(userSetting.activityNotification) over (order by modifiedAt), true
+        last_value(userSetting.activityNotification order by modifiedAt), true
       ) as activityNotification: ActivityNotification,
 } group by modifiedBy;
+// following is the version which works for sqlite
+// @cds.autoexpose
+// entity EventLogUserTeamArrays as projection on EventLogs {
+//   key modifiedBy as user_ID,
+//       coalesce(
+//         last_value(userSetting.environmentNotification) over (order by modifiedAt), true
+//       ) as environmentNotification: EnvironmentNotification,
+//       coalesce(
+//         last_value(userSetting.processNotification) over (order by modifiedAt), true
+//       ) as processNotification: ProcessNotification,
+//       coalesce(
+//         last_value(userSetting.activityNotification) over (order by modifiedAt), true
+//       ) as activityNotification: ActivityNotification,
+// } group by modifiedBy;
