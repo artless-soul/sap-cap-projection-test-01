@@ -1,0 +1,4 @@
+createdAt,createdBy,modifiedAt,modifiedBy,ID,description,environmentNotification,processNotification,activityNotification
+,,,,user1,user1 setings,true,false,false
+,,,,user2,user2 setings,true,true,true
+,,,,user3,user3 setings,false,false,false
