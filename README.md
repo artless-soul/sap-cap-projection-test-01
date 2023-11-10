@@ -17,6 +17,7 @@ cds repl
 
 ### Result from the cap cql
 > const { ['sap.avp.EventLogUserTeamArrays']: EventLogUserTeamArrays} = cds.model?.definitions;
+>
 > await SELECT.from(EventLogUserTeamArrays);
 
 --> Output is differnt and not correct.
